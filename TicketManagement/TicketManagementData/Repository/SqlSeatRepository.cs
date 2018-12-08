@@ -17,12 +17,13 @@ namespace TicketManagementData.Repository
 
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.Parameters.AddWithValue("@id", id);
-            cmd.CommandText = "select*from seat where id = @id";
-            var seat = new Seat();
+            cmd.CommandText = "select * from seat where id = @id";
+            Seat seat = null;
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read())
+                if (reader.Read())
                 {
+                    seat = new Seat();
                     seat.AreaId =(int)reader[1];
                     seat.Row = (int)reader[2];
                     seat.Number =(int)reader[3];
@@ -40,12 +41,12 @@ namespace TicketManagementData.Repository
             cmd.Parameters.Add("@areaId", item.AreaId);
             cmd.Parameters.Add("@row", item.Row);
             cmd.Parameters.Add("@number",item.Number);
-            cmd.CommandText = "Insert into seat(areaId,row,number)output inserted.id values(@areaId,@row,@number)";
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read())
-                item.Id = (int)reader[0];
-            reader.Close();
-
+            cmd.CommandText = "Insert into seat(areaId,row,number) output inserted.id values(@areaId,@row,@number)";
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                    item.Id = (int) reader[0];
+            }
         }
 
         public void Update(Seat item)

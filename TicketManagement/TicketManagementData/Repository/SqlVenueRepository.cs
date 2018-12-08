@@ -16,11 +16,12 @@ namespace TicketManagementData.Repository
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.Parameters.AddWithValue("@id", id);
             cmd.CommandText = "select*from area where id = @id";
-            Venue ven = new Venue();
+            Venue ven = null;
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read())
+                if (reader.Read())
                 {
+                    ven = new Venue();
                     ven.Description =(string)reader[1];
                     ven.Adress = (string) reader[2];
                     ven.Phone = (int) reader[3];
@@ -38,9 +39,11 @@ namespace TicketManagementData.Repository
             cmd.Parameters.Add("@adress", item.Adress);
             cmd.Parameters.Add("@phone", item.Phone);
             cmd.CommandText = "Insert venue(description,adress,phone)output inserted.id values(@description,@adress,@phone)";
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read())
-                item.Id = (int)reader[0];
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                    item.Id = (int) reader[0];
+            }
         }
 
         public void Update(Venue item)

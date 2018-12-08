@@ -20,9 +20,11 @@ namespace TicketManagementData.Repository
             cmd.Parameters.Add("@coordY", item.CoordY);
             cmd.Parameters.Add("@price", item.Price);
             cmd.CommandText = "Insert into eventArea(eventId,description,coordX,coordY,price) output inserted.id values(@eventId,@description,@coordX,@coordY,@price)";
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read())
-                item.Id = (int)reader[0];
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                    item.Id = (int) reader[0];
+            }
         }
 
         public void Delete(int id)
@@ -35,17 +37,18 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.Parameters.AddWithValue("@id", id);
-            cmd.CommandText = "select*from eventArea where id = @id";
-            EventArea ev = new EventArea();
+            cmd.CommandText = "select eventId, description, coordX, coordY, price from eventArea where id = @id";
+            EventArea ev = null;
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    ev.EventId = (int)reader[1];
-                    ev.Description = (string) reader[2];
-                    ev.CoordX = (int) reader[3];
-                    ev.CoordY = (int) reader[4];
-                    ev.Price = (float) reader[5];
+                    ev = new EventArea();
+                    ev.EventId = (int)reader[0];
+                    ev.Description = (string) reader[1];
+                    ev.CoordX = (int) reader[2];
+                    ev.CoordY = (int) reader[3];
+                    ev.Price = (float) reader[4];
                 }
             }
 

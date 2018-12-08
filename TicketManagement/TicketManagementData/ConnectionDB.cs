@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 
-namespace TicketManagementData.Entities
+namespace TicketManagementData
 {
-    public class ConnectionDB
+    internal class ConnectionDB
     {
         private SqlConnection sqlConnections;
         public SqlConnection SqlConnections { get => sqlConnections; set => sqlConnections = value; }
 
         // singelton
-        private static ConnectionDB instance =null;
+        private static ConnectionDB instance = null;
 
         private ConnectionDB()
         {
@@ -21,11 +21,15 @@ namespace TicketManagementData.Entities
 
         public static ConnectionDB getInstance()
         {
-            if(instance==null) instance = new ConnectionDB();
+            if (instance == null)
+            {
+                instance = new ConnectionDB();
+                instance.Connecting();
+            }
             return instance;
         }
 
-        public void connecting()
+        private void Connecting()
         {
             string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\couse\\epam\\Git\\TicketManagement\\DB\\db.mdf;Integrated Security=True;Connect Timeout=30";
 

@@ -15,11 +15,12 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.CommandText = "select*from seat where id = @id";
-            Layout layout = new Layout();
+            Layout layout = null;
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read())
+                if (reader.Read())
                 {
+                    layout = new Layout();
                     layout.VenueId = (int)reader[1];
                     layout.Description =(string)reader[2];
                 }
@@ -36,10 +37,11 @@ namespace TicketManagementData.Repository
             cmd.Parameters.Add("@venueId", item.VenueId);
             cmd.Parameters.Add("@description", item.Description);
             cmd.CommandText = "Insert into layout(venueId,description)output inserted.id values(@venueId,@description)";
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read())
-                item.Id = (int)reader[0];
-            reader.Close();
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                    item.Id = (int) reader[0];
+            }
         }
 
         public void Update(Layout item)

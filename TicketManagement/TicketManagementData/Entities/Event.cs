@@ -6,12 +6,23 @@ using System.Threading.Tasks;
 
 namespace TicketManagementData.Entities
 {
-    class Event
+    public class Event
     {
         private int id;
         private string name;
         private string description;
         private int layoutId;
+
+        public Event()
+        {
+        }
+
+        public Event(string name, string description, int layoutId)
+        {
+            this.name = name;
+            this.description = description;
+            this.layoutId = layoutId;
+        }
 
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }

@@ -17,19 +17,20 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.Parameters.AddWithValue("@id", id);
-            cmd.CommandText = "select*from area where id = @id";
-            var ar = new Area();
+            cmd.CommandText = "select * from area where id = @id";
+            Area ar = null;
             using (SqlDataReader reader = cmd.ExecuteReader())
-             {
-                 while (reader.Read())
-                 {
-                     ar.LayoutId =(int)reader[1];
-                     ar.Description=(string)reader[2];
-                     ar.CoordX = (int) reader[3];
-                     ar.CoordY = (int) reader[4];
-                     Console.Read();
-                 }
-             } 
+            {
+                if (reader.Read())
+                {
+                    ar = new Area();
+                    ar.LayoutId =(int)reader[1];
+                    ar.Description=(string)reader[2];
+                    ar.CoordX = (int) reader[3];
+                    ar.CoordY = (int) reader[4];
+                    // Console.Read();
+                }
+            }
 
             return ar;
         }
@@ -39,13 +40,15 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.Parameters.AddWithValue("@layoutId",item.LayoutId);
-            cmd.Parameters.Add("@description", item.Description);
-            cmd.Parameters.Add("@coordX", item.CoordX);
-            cmd.Parameters.Add("@coordY", item.CoordY);
+            cmd.Parameters.AddWithValue("@description", item.Description);
+            cmd.Parameters.AddWithValue("@coordX", item.CoordX);
+            cmd.Parameters.AddWithValue("@coordY", item.CoordY);
             cmd.CommandText = "Insert into area(layoutId,description,coordX,coordY) output inserted.id values(@layoutId,@description,@coordX,@coordY)";
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read())
-                item.Id = (int)reader[0];
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                    item.Id = (int) reader[0];
+            }
         }
 
         public void Save()
