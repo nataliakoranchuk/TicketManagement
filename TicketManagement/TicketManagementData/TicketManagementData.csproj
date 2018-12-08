@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90F22A7C-A4CB-4098-BA25-E4E69197E1A5}</ProjectGuid>
+    <ProjectGuid>{533145CF-F089-446F-AB9D-9FBF79A5CB4F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TicketManagement</RootNamespace>
-    <AssemblyName>TicketManagement</AssemblyName>
+    <RootNamespace>TicketManagementData</RootNamespace>
+    <AssemblyName>TicketManagementData</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,13 +42,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Area.cs" />
+    <Compile Include="ConnectionDB.cs" />
+    <Compile Include="Entities\Event.cs" />
+    <Compile Include="Entities\EventArea.cs" />
+    <Compile Include="Entities\EventSeat.cs" />
     <Compile Include="Entities\Layout.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Seat.cs" />
     <Compile Include="Entities\Venue.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\SqlAreaRepository.cs" />
+    <Compile Include="Repository\SqlEventAreaRepository.cs" />
+    <Compile Include="Repository\SqlEventRepository.cs" />
+    <Compile Include="Repository\SqlEventSeatRepository.cs" />
+    <Compile Include="Repository\SqlLayoutRepository.cs" />
+    <Compile Include="Repository\SqlSeatRepository.cs" />
+    <Compile Include="Repository\SqlVenueRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

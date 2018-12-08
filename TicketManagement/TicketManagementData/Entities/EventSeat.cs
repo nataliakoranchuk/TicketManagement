@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicketManagement
+namespace TicketManagementData.Entities
 {
-    class Seat
+    internal class EventSeat
     {
         private int id;
-        private int areaId;
+        private int eventAreaId;
         private int row;
         private int number;
+        private bool state;
 
         public int Id { get => id; set => id = value; }
-        public int AreaId { get => areaId; set => areaId = value; }
+        public int EventAreaId { get => eventAreaId; set => eventAreaId = value; }
         public int Row { get => row; set => row = value; }
         public int Number { get => number; set => number = value; }
+        public bool State { get => state; set => state = value; }
     }
 }

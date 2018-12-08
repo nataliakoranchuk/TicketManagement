@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicketManagement
+namespace TicketManagementData.Entities
 {
-    class Layout
+    class Event
     {
         private int id;
-        private int vanueId;
+        private string name;
         private string description;
+        private int layoutId;
 
         public int Id { get => id; set => id = value; }
-        public int VanueId { get => vanueId; set => vanueId = value; }
+        public string Name { get => name; set => name = value; }
         public string Description { get => description; set => description = value; }
+        public int LayoutId { get => layoutId; set => layoutId = value; }
     }
 }
