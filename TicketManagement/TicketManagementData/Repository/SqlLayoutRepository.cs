@@ -14,15 +14,15 @@ namespace TicketManagementData.Repository
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
-            cmd.CommandText = "select*from seat where id = @id";
+            cmd.CommandText = "select venueId,description from seat where id = @id";
             Layout layout = null;
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
                 {
                     layout = new Layout();
-                    layout.VenueId = (int)reader[1];
-                    layout.Description =(string)reader[2];
+                    layout.VenueId = (int)reader[0];
+                    layout.Description =(string)reader[1];
                 }
             }
 
@@ -34,8 +34,8 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
-            cmd.Parameters.Add("@venueId", item.VenueId);
-            cmd.Parameters.Add("@description", item.Description);
+            cmd.Parameters.AddWithValue("@venueId", item.VenueId);
+            cmd.Parameters.AddWithValue("@description", item.Description);
             cmd.CommandText = "Insert into layout(venueId,description)output inserted.id values(@venueId,@description)";
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
@@ -49,10 +49,10 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
-            cmd.Parameters.Add("@id", item.Id);
-            cmd.Parameters.Add("@venueId", item.VenueId);
-            cmd.Parameters.Add("@description",item.Description);
-            cmd.CommandText = "update seat layout  where id=@id";
+            cmd.Parameters.AddWithValue("@id", item.Id);
+            cmd.Parameters.AddWithValue("@venueId", item.VenueId);
+            cmd.Parameters.AddWithValue("@description",item.Description);
+            cmd.CommandText = "update layout set venueId=@venueId,description=@description  where id=@id";
             cmd.ExecuteNonQuery();
         }
 

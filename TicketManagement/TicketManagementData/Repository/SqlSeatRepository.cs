@@ -17,16 +17,16 @@ namespace TicketManagementData.Repository
 
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.Parameters.AddWithValue("@id", id);
-            cmd.CommandText = "select * from seat where id = @id";
+            cmd.CommandText = "select areaId,row,number from seat where id = @id";
             Seat seat = null;
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
                 {
                     seat = new Seat();
-                    seat.AreaId =(int)reader[1];
-                    seat.Row = (int)reader[2];
-                    seat.Number =(int)reader[3];
+                    seat.AreaId =(int)reader[0];
+                    seat.Row = (int)reader[1];
+                    seat.Number =(int)reader[2];
                 }
             }
 
@@ -38,9 +38,9 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
-            cmd.Parameters.Add("@areaId", item.AreaId);
-            cmd.Parameters.Add("@row", item.Row);
-            cmd.Parameters.Add("@number",item.Number);
+            cmd.Parameters.AddWithValue("@areaId", item.AreaId);
+            cmd.Parameters.AddWithValue("@row", item.Row);
+            cmd.Parameters.AddWithValue("@number",item.Number);
             cmd.CommandText = "Insert into seat(areaId,row,number) output inserted.id values(@areaId,@row,@number)";
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
@@ -54,10 +54,11 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
-            cmd.Parameters.Add("@id", item.Id);
-            cmd.Parameters.Add("@areaId", item.AreaId);
-            cmd.Parameters.Add("@row", item.Row);
-            cmd.CommandText = "update seat set areaId=@areaId,row=@row where id=@id";
+            cmd.Parameters.AddWithValue("@id", item.Id);
+            cmd.Parameters.AddWithValue("@areaId", item.AreaId);
+            cmd.Parameters.AddWithValue("@row", item.Row);
+            cmd.Parameters.AddWithValue("@number", item.Number);
+            cmd.CommandText = "update seat set areaId=@areaId,row=@row,number=@number where id=@id";
             cmd.ExecuteNonQuery();
         }
 

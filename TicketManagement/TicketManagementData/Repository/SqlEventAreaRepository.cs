@@ -14,11 +14,11 @@ namespace TicketManagementData.Repository
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
-            cmd.Parameters.Add("@eventId", item.EventId);
-            cmd.Parameters.Add("@description", item.Description);
-            cmd.Parameters.Add("@coordX", item.CoordX);
-            cmd.Parameters.Add("@coordY", item.CoordY);
-            cmd.Parameters.Add("@price", item.Price);
+            cmd.Parameters.AddWithValue("@eventId", item.EventId);
+            cmd.Parameters.AddWithValue("@description", item.Description);
+            cmd.Parameters.AddWithValue("@coordX", item.CoordX);
+            cmd.Parameters.AddWithValue("@coordY", item.CoordY);
+            cmd.Parameters.AddWithValue("@price", item.Price);
             cmd.CommandText = "Insert into eventArea(eventId,description,coordX,coordY,price) output inserted.id values(@eventId,@description,@coordX,@coordY,@price)";
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
@@ -29,7 +29,11 @@ namespace TicketManagementData.Repository
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = ConnectionDB.getInstance().SqlConnections;
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.CommandText = "delete from eventArea where id = @id";
+            cmd.ExecuteNonQuery();
         }
 
         public EventArea GetById(int id)
@@ -57,7 +61,16 @@ namespace TicketManagementData.Repository
 
         public void Update(EventArea item)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = ConnectionDB.getInstance().SqlConnections;
+            cmd.Parameters.AddWithValue("@id", item.Id);
+            cmd.Parameters.AddWithValue("@eventId", item.EventId);
+            cmd.Parameters.AddWithValue("description", item.Description);
+            cmd.Parameters.AddWithValue("@coordX", item.CoordX);
+            cmd.Parameters.AddWithValue("@coordY", item.CoordY);
+            cmd.Parameters.AddWithValue("@price", item.Price);
+            cmd.CommandText ="update eventArea set eventId=@eventId,description=@description,coordX=@coordX,coordY=@coordY where id=@id";
+            cmd.ExecuteNonQuery();
         }
     }
 }

@@ -15,16 +15,16 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.Parameters.AddWithValue("@id", id);
-            cmd.CommandText = "select*from area where id = @id";
+            cmd.CommandText = "select description,adress,phone from venue where id = @id";
             Venue ven = null;
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
                 {
                     ven = new Venue();
-                    ven.Description =(string)reader[1];
-                    ven.Adress = (string) reader[2];
-                    ven.Phone = (int) reader[3];
+                    ven.Description =(string)reader[0];
+                    ven.Adress = (string) reader[1];
+                    ven.Phone = (int) reader[2];
                 }
             }
 
@@ -35,9 +35,9 @@ namespace TicketManagementData.Repository
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
-            cmd.Parameters.Add("@description", item.Description);
-            cmd.Parameters.Add("@adress", item.Adress);
-            cmd.Parameters.Add("@phone", item.Phone);
+            cmd.Parameters.AddWithValue("@description", item.Description);
+            cmd.Parameters.AddWithValue("@adress", item.Adress);
+            cmd.Parameters.AddWithValue("@phone", item.Phone);
             cmd.CommandText = "Insert venue(description,adress,phone)output inserted.id values(@description,@adress,@phone)";
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
@@ -50,10 +50,10 @@ namespace TicketManagementData.Repository
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
-            cmd.Parameters.Add("@description", item.Description);
-            cmd.Parameters.Add("@adress", item.Adress);
-            cmd.Parameters.Add("@phone", item.Phone);
-            cmd.CommandText = "update venue set description = @description, adress = @adress,phone=@phone where id=@id";
+            cmd.Parameters.AddWithValue("@description", item.Description);
+            cmd.Parameters.AddWithValue("@adress", item.Adress);
+            cmd.Parameters.AddWithValue("@phone", item.Phone);
+            cmd.CommandText = "update venue set description = @description, adress = @adress, phone=@phone where id=@id";
             cmd.ExecuteNonQuery();
         }
 
@@ -62,7 +62,7 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.Parameters.AddWithValue("@id", id);
-            cmd.CommandText = "delete area where id = @id";
+            cmd.CommandText = "delete venue where id = @id";
             cmd.ExecuteNonQuery();
         }
     }

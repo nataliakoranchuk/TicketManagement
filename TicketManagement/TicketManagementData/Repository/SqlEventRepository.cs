@@ -36,7 +36,23 @@ namespace TicketManagementData.Repository
 
         public Event GetById(int id)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = ConnectionDB.getInstance().SqlConnections;
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.CommandText = "select name,description,layoutId from event where id = @id";
+            Event ar = null;
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    ar = new Event();
+                    ar.Name= (string)reader[0];
+                    ar.Description = (string)reader[1];
+                    ar.LayoutId = (int)reader[2];
+                }
+            }
+
+            return ar;
         }
 
         public void Update(Event item)

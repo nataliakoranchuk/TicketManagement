@@ -17,17 +17,17 @@ namespace TicketManagementData.Repository
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
             cmd.Parameters.AddWithValue("@id", id);
-            cmd.CommandText = "select * from area where id = @id";
+            cmd.CommandText = "select layoutId,description,,coordX,coordY from area where id = @id";
             Area ar = null;
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
                 {
                     ar = new Area();
-                    ar.LayoutId =(int)reader[1];
-                    ar.Description=(string)reader[2];
-                    ar.CoordX = (int) reader[3];
-                    ar.CoordY = (int) reader[4];
+                    ar.LayoutId =(int)reader[0];
+                    ar.Description=(string)reader[1];
+                    ar.CoordX = (int) reader[2];
+                    ar.CoordY = (int) reader[3];
                     // Console.Read();
                 }
             }
@@ -60,11 +60,11 @@ namespace TicketManagementData.Repository
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnectionDB.getInstance().SqlConnections;
-            cmd.Parameters.Add("@id", item.Id);
+            cmd.Parameters.AddWithValue("@id", item.Id);
             cmd.Parameters.AddWithValue("@layoutId", item.LayoutId);
-            cmd.Parameters.Add("@description", item.Description);
-            cmd.Parameters.Add("@coordX", item.CoordX);
-            cmd.Parameters.Add("@coordY", item.CoordY);
+            cmd.Parameters.AddWithValue("@description", item.Description);
+            cmd.Parameters.AddWithValue("@coordX", item.CoordX);
+            cmd.Parameters.AddWithValue("@coordY", item.CoordY);
             cmd.CommandText = "update area set layoutId =@layoutId,description=@description,coordX=@coordX,coordY=@coordY where id=@id";
             cmd.ExecuteNonQuery();
         }

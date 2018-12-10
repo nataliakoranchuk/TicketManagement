@@ -12,12 +12,24 @@ namespace TicketManagementData.Entities
         private int eventAreaId;
         private int row;
         private int number;
-        private bool state;
+        private string state;
+
+        public EventSeat()
+        {
+        }
+
+        public EventSeat(int eventAreaId,int row,int number,string state)
+        {
+            this.eventAreaId = eventAreaId;
+            this.row = row;
+            this.number = number;
+            this.state = state;
+        }
 
         public int Id { get => id; set => id = value; }
         public int EventAreaId { get => eventAreaId; set => eventAreaId = value; }
         public int Row { get => row; set => row = value; }
         public int Number { get => number; set => number = value; }
-        public bool State { get => state; set => state = value; }
+        public string State { get => state; set => state = value; }
     }
 }
