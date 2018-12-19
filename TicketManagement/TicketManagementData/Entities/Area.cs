@@ -8,7 +8,7 @@ namespace TicketManagementData.Entities
 {
     public class Area
     {
-        private int id;
+        private int id = -1;
         private int layoutId;
         private string description;
         private int coordX;

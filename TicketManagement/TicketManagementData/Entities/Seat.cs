@@ -8,7 +8,7 @@ namespace TicketManagementData.Entities
 {
     public class Seat
     {
-        private int id;
+        private int id = -1;
         private int areaId;
         private int row;
         private int number;

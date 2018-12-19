@@ -5,9 +5,11 @@ VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketManagementData", "TicketManagementData\TicketManagementData.csproj", "{533145CF-F089-446F-AB9D-9FBF79A5CB4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{F81293E4-641B-41AA-8695-1B93D946EF98}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketManagementBusiness", "TicketManagementBusiness\TicketManagementBusiness.csproj", "{F10AC4CB-DD43-4557-A977-07282D9B3FAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketManagementBusiness.Test", "TicketManagementBusiness.Test\TicketManagementBusiness.Test.csproj", "{EB70A121-B01E-4162-8031-E679D410AF97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketManagement.IntegrationTest", "TicketManagement.IntegrationTest\TicketManagement.IntegrationTest.csproj", "{6DB75922-3656-4AF7-91BB-45416526648A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{533145CF-F089-446F-AB9D-9FBF79A5CB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{533145CF-F089-446F-AB9D-9FBF79A5CB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{533145CF-F089-446F-AB9D-9FBF79A5CB4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F81293E4-641B-41AA-8695-1B93D946EF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F81293E4-641B-41AA-8695-1B93D946EF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F81293E4-641B-41AA-8695-1B93D946EF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F81293E4-641B-41AA-8695-1B93D946EF98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F10AC4CB-DD43-4557-A977-07282D9B3FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F10AC4CB-DD43-4557-A977-07282D9B3FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F10AC4CB-DD43-4557-A977-07282D9B3FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F10AC4CB-DD43-4557-A977-07282D9B3FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB70A121-B01E-4162-8031-E679D410AF97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB70A121-B01E-4162-8031-E679D410AF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB70A121-B01E-4162-8031-E679D410AF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB70A121-B01E-4162-8031-E679D410AF97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DB75922-3656-4AF7-91BB-45416526648A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DB75922-3656-4AF7-91BB-45416526648A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DB75922-3656-4AF7-91BB-45416526648A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DB75922-3656-4AF7-91BB-45416526648A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

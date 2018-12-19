@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TicketManagementData.Entities
 {
-    internal class EventSeat
+    public class EventSeat
     {
-        private int id;
+        private int id = -1;
         private int eventAreaId;
         private int row;
         private int number;

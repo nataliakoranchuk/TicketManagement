@@ -6,14 +6,27 @@ using System.Threading.Tasks;
 
 namespace TicketManagementData.Entities
 {
-    class EventArea
+    public class EventArea
     {
-        private int id;
+        private int id = -1;
         private int eventId;
         private string description;
         private int coordX;
         private int coordY;
         private float price;
+
+        public EventArea()
+        {
+        }
+
+        public EventArea(int eventId, string description, int coordX, int coordY, float price)
+        {
+            this.eventId = eventId;
+            this.description = description;
+            this.coordX = coordX;
+            this.coordY = coordY;
+            this.price = price;
+        }
 
         public int Id { get => id; set => id = value; }
         public int EventId { get => eventId; set => eventId = value; }

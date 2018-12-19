@@ -6,27 +6,30 @@ using System.Threading.Tasks;
 
 namespace TicketManagementData.Entities
 {
-    class Venue
+    public class Venue
     {
-        private int id;
+        private int id = -1;
         private string description;
-        private string adress;
-        private int phone;
+        private string name;
+        private string address;
+        private string phone;
 
         public Venue()
         {
         }
 
-        public Venue(string description,string adress,int phone)
+        public Venue(string description, string name, string address, string phone)
         {
             this.description = description;
-            this.adress = adress;
+            this.name = name;
+            this.address = address;
             this.phone = phone;
         }
 
         public int Id { get => id; set => id = value; }
         public string Description { get => description; set => description = value; }
-        public string Adress { get => adress; set => adress = value; }
-        public int Phone { get => phone; set => phone = value; }
+        public string Address { get => address; set => address = value; }
+        public string Phone { get => phone; set => phone = value; }
+        public string Name { get => name; set => name = value; }
     }
 }
